@@ -25,10 +25,9 @@ jobs:
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli
 
-            - name: Initialize Android Manifest
-        run: |
-          yes | bubblewrap init --manifest https://aliathar535-coder.github.io/Gadipro2/manifest.json --directory ./android-app --skip_jdk_check
-          
+      - name: Initialize Android Manifest
+        run: bubblewrap init --manifest https://aliathar535-coder.github.io/Gadipro2/manifest.json --directory ./android-app --skip_jdk_check
+
       - name: Build APK
         run: |
           cd android-app
