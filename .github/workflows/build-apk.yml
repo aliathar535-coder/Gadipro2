@@ -25,12 +25,41 @@ jobs:
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli
 
-      - name: Generate TWA Config Non-Interactively
+      - name: Create TWA Config Manually
         run: |
-          npx @bubblewrap/cli init --manifest https://aliathar535-coder.github.io/Gadipro2/manifest.json --directory ./android-app --skip_jdk_check --appname "Gadipro" --packageId "com.gadipro.app" --srcurl "https://aliathar535-coder.github.io/Gadipro2/"
+          echo '{
+            "packageId": "com.gadipro.app",
+            "host": "aliathar535-coder.github.io",
+            "name": "Gadipro",
+            "shortName": "Gadipro",
+            "startUrl": "/Gadipro2/",
+            "manifestUrl": "https://aliathar535-coder.github.io/Gadipro2/manifest.json",
+            "themeColor": "#ffffff",
+            "navigationColor": "#ffffff",
+            "backgroundColor": "#ffffff",
+            "display": "standalone",
+            "orientation": "any",
+            "shortcuts": [],
+            "iconUrl": "https://aliathar535-coder.github.io/Gadipro2/favicon.ico",
+            "maskableIconUrl": "",
+            "monochromeIconUrl": "",
+            "splashScreenFadeOutDuration": 300,
+            "signingKey": {
+              "path": "./android.keystore",
+              "alias": "android"
+            },
+            "generatorApp": "bubblewrap-cli",
+            "webManifestUrl": "",
+            "fallbackType": "customtabs",
+            "features": {},
+            "alphaDependencies": false,
+            "enableNotifications": false,
+            "appVersionName": "1.0",
+            "appVersionCode": 1,
+            "allowPermissionsOnStart": false
+          }' > twa-manifest.json
 
       - name: Build APK File
         run: |
-          cd android-app
-          bubblewrap build
+          bubblewrap build --skip-signing
           
